@@ -8,27 +8,27 @@ module.exports = (sequelize, DataTypes) => {
       return this.update({ password });
     }
 
-    static async createAVoter({ voterid, password, electionID }) {
+    static async createAVoter({ voter_id, password, election_id }) {
       return await this.create({
-        voterid,
+        voter_id,
         password,
-        electionID,
-        votedOrNot: false,
+        election_id,
+        voted: false,
       });
     }
 
-    static async getNumberOfVoterss(electionID) {
+    static async getNumberOfVoterss(election_id) {
       return await this.count({
         where: {
-          electionID,
+          election_id,
         },
       });
     }
 
-    static async gettVoters(electionID) {
+    static async gettVoters(election_id) {
       return await this.findAll({
         where: {
-          electionID,
+          election_id,
         },
         order: [["id", "ASC"]],
       });
@@ -52,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      voterModel.belongsTo(models.electionModel, {
-        foreignKey: "electionID",
+      model_voter.belongsTo(models.model_election, {
+        foreignKey: "election_id",
       });
     }
   }

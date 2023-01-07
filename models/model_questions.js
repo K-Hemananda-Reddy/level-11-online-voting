@@ -67,11 +67,11 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      questionsModel.belongsTo(models.model_election, {
+      model_questions.belongsTo(models.model_election, {
         foreignKey: "election_id",
       });
 
-      questionsModel.hasMany(models.model_option, {
+      model_questions.hasMany(models.model_option, {
         foreignKey: "question_id",
       });
     }
