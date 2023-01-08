@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      optionModel.belongsTo(models.model_questions, {
+      model_option.belongsTo(models.model_questions, {
         foreignKey: "question_id",
         onDelete: "CASCADE",
       });

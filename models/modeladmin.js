@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       return this.update({ password });
     }
 
-    static createAdmin({ first_name, last_name, email, password }) {
+    static create_a_new_admin({ first_name, last_name, email, password }) {
       return this.create({
         first_name,
         last_name,
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      Admin.hasMany(models.model_election, {
+      ModelAdmin.hasMany(models.model_election, {
         foreignKey: "admin_id",
       });
     }
