@@ -1,5 +1,6 @@
  @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap'); 
- @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap'); 
+ @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');  
 
 body{
     display:flex;
@@ -9,6 +10,7 @@ body{
     color: white;
     background-color: black;
     animation: bg-change 5s infinite;
+    font-family: 'PT Sans', sans-serif;
 }
 
 @keyframes bg-change {

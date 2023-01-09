@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
     <title><%= title %></title>
-    <link rel="icon" type="image/x-icon" href="/img/vote.png">
+    <style>
+        .button {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: #538fbe;
+    padding: 1rem;
+    font-size: 24px;
+    border: 1px solid #2d6898;
+}
+.button:hover{
+    background-color: black;
+}
+    </style>
     <script>
         function deleteElection(id) {
         fetch(`/elections/${id}`, {
@@ -22,61 +36,37 @@
         }).catch((err)=> console.error(err))
     }
     </script>
-    <style>
-        body{
-          background-size:cover;
-        }
-        .e{
-            display: flex;
-            flex-direction: column;
-        }
-        .one{
-            display: flex;
-        }
-        .two{
-            display: flex;
-            flex-direction: row;
-        }
-        .three{
-            display: flex;
-            flex-direction: row;
-        }
-        .four{
-            display: flex;
-            flex-direction: row;
-        }
-
-      </style>
+  
 </head>
-<!-- home page for the admin where the admin can create the election and can perform the necessary functions -->
-<body class="bg-gray-50" background="img/image2.jpg">
+
+<body >
 
     <%- include('header.ejs') %>
-    <div class="my-6 mx-10">
-        <h3 class="text-4xl my-4 font-medium font-serif text-white">Hey, <%= userName %>!!!</h3>
+    <div>
+        <h3 style="font-family: 'Lobster', cursive;font-size: 2rem;color: coral;">Welcome <%= userName %> !</h3>
         <div>
             <% if (messages.success) { %>
-                <p class="bg-cyan-100 m-3 list-none rounded-md px-4 py-2"><%= messages.success %></p>
+                <p ><%= messages.success %></p>
             <% } %>
         </div>
 
-        <!-- <div class="one py-4"> -->
-        <div class="one flex gap-2 py-4 justify-between">
-            <!-- <h5 class="text-2xl font-serif text-white text-decoration-line: underline">Here are your elections</h5> -->
-            <div class="bg-cyan-800 rounded w-fit px-2 py-1 hover:bg-cyan-600">
-                <a href="/elections/create" class="text-white font-serif hover:text-indigo-900 px-5">+ Election</a>
+
+        <div >
+
+            <div >
+                <a class="button" href="/elections/create" >+ Create a New Election</a>
             </div>
         </div>
     
-        <div class="e">
-        <!-- <div class="e flex-auto"> -->
-            <div class="mx-4">  
-                <p class="text-white font-serif text-white"><%= (elections.length==0)?"Hey,You haven't created any elections yet!!!":"" %></p>
-                <ol style="list-style-type:lower-alpha" class="text-white">
+        <div >
+ 
+            <div >  
+                <p ><%= (elections.length==0)?"Create atleast one election ! ":"" %></p>
+                <ol >
                     <% for (let i=0; i<elections.length; i++) { %>
-                        <li>
-                            <div class="flex items-center w-fit my-2 px-2 py-3">
-                                <a href="/elections/<%= elections[i].id %>" class="m-2 text-xl text-rose-400 font-serif hover:text-white"><%= elections[i].election_name %></a>
+                        <li style="background-color: aquamarine;margin-top: 1rem;text-align: center;padding: 1rem;">
+                            <div >
+                                <a style="text-decoration: none;color: blue;" href="/elections/<%= elections[i].id %>"><%= elections[i].election_name %></a>
                             </div>
                         </li>
                     <% } %>
