@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<%= csrfToken %>">
-    <script src="https://cdn.tailwindcss.com"></script>
+   
     <link rel="icon" type="image/x-icon" href="/img/vote.png">
     <script>
         //function for deleting option
@@ -25,70 +25,149 @@
             }).catch((err1)=> console.error(err1))
         }
     </script>
-    <link rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <title><%= title %></title>
     <style>
-        body{
-          background-size:cover;
-        }
-        .one{
-            display: flex;
-            flex-direction: col;
-            overflow: hidden;
-        }
-        .two{
-            display: flex;
-            flex-direction: col;
-            overflow: hidden;
-        }
-        .three{
-            display: flex;
-            flex-direction: col;
-            overflow: hidden;
-        }
+      @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap'); 
+ @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');  
+
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+    animation: bg-change 5s infinite;
+    font-family: 'PT Sans', sans-serif;
+}
+
+@keyframes bg-change {
+    0% { background-color: black; }
+    50% { background-color: grey; }
+    100% {  background-color: rgb(210, 207, 207);}
+}
+
+.header{
+    margin-top: 2rem;
+    border: 3px solid white;
+    padding: 1rem;
+    background-color: hotpink;
+    border-radius: 10px;
+    width:95vw;
+    text-align: center;
+    font-family: 'Rowdies', cursive;
+    font-size: 2rem;
+    animation: back-change 2s infinite;
+}
+
+@keyframes back-change {
+    0% { background-color: yellow; }
+    50% { background-color: antiquewhite; }
+    100% {  background-color: rgb(250, 166, 208);}
+    
+}
+
+
+  
+  @keyframes color-change {
+    0% { color: green; }
+    50% { color: blue;; }
+    100% { color: brown; }
+  }
+
+
+
+.header a{
+    text-decoration: none;
+    color: blueviolet;
+    animation: color-change 2s infinite;
+}
+.btn{
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    border: 3px solid white;
+    border-radius: 9px;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: bolder;
+}
+
+.mt{
+    margin-top: 4rem;
+}
+
+
+.pushable {
+    background: hsl(340deg 100% 32%);
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    cursor: pointer;
+  }
+  .front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: hsl(345deg 100% 47%);
+    color: white;
+    transform: translateY(-4px);
+  }
+  
+  .pushable:focus:not(:focus-visible) {
+    outline: none;
+  }
+  input{
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 3px solid blue;
+    margin-bottom: 1rem;
+  }
       </style>
 </head>
-<body class="bg-gray-50" background="img/image.jpg">
+<body >
     <%- include('header.ejs') %>
     <!-- including header file -->
 
-    <div class="flex gap-1 mx-10 mt-6 bg-green-200">
-        <span>--></span>
-        <a href="/elections" class="text-cyan-800 hover:text-cyan-600 font-serif">All Elections</a>
-        <span>--></span>
-        <a href="/elections/<%= id %>/" class="text-cyan-800 hover:text-cyan-600 font-serif">Election</a>
-        <span>--></span>
-        <a href="/elections/<%= id %>/questions" class="text-cyan-800 hover:text-cyan-600 font-serif">Questions</a>
+    <div style="display:flex;justify-content:space-around;align-items:center;width: 50%;">
+        
+        <a class="pushable front" href="/elections">All Elections</a>
+        
+        <a class="pushable front" href="/elections/<%= id %>/" >Election</a>
+        
+        <a class="pushable front" href="/elections/<%= id %>/questions" >Questions</a>
     </div>
 
-    <div class="grid grid-cols-6 bg-yellow-200">
-        <div class="col-start-2 col-span-4">
-            <div class="rounded-lg px-6 py-3">
+    <div>
+        <div >
+            <div >
                 <% if (messages && messages.error && messages.error.length > 0) { %>
                     <% for(var i=0; i<messages.error.length; i++) { %>
-                        <p class="bg-white my-3 list-none rounded-md px-4 py-2 font-serif"><%= messages.error[i] %></p>
+                        <p ><%= messages.error[i] %></p>
                     <% } %>
                 <% } %>
                 </div>
-            <div class="px-2 py-2">
-                <h3 class="text-2xl my-2 font-serif"><%= title %></h3>
-                <p class="text-cyan-800 text-md my-2 font-serif"><%= description %></p>
+            <div >
+                <h1><%= title %></h1>
+                <h3 ><%= description %></h3>
             </div>
-            <div class="ml-12 flex flex-col">
-                <ol class="list-decimal">
+            <div >
+                <ol style="background-color: aqua;color: black;padding: 2rem;border: 5px solid salmon;border-radius: 1rem;" class="list-decimal">
                     <% for(let i=0; i<options.length; i++) { %>
-                        <li class="option-item">
-                            <div class="justify-between w-full my-2 px-2 py-1 rounded-lg bg-green-100">
-                                <p class="ml-2 text-lg font-serif"><%= options[i].choice %></p>
-                                <div class="flex floex-col gap-2 text-cyan-800">
-                                <div class="rounded w-fit px-2 py-1 flex gap-2 cursor-pointer hover:text-cyan-600">                                                                         
-                                      <?xml version="1.0" encoding="UTF-8"?><svg width="45" height="45" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="white" fill-opacity="0.01"/><path d="M42 26V40C42 41.1046 41.1046 42 40 42H8C6.89543 42 6 41.1046 6 40V8C6 6.89543 6.89543 6 8 6L22 6" stroke="#333" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 26.7199V34H21.3172L42 13.3081L34.6951 6L14 26.7199Z" fill="none" stroke="#333" stroke-width="1" stroke-linejoin="round"/></svg>
-                                    <a href="/elections/<%= id %>/questions/<%= questionID %>/options/<%= options[i].id %>/edit" class="text-sm font-serif">>Edit option</a>
+                        <li >
+                            <div style="border: 3px solid green;border-radius: 1rem;background-color: antiquewhite;padding: 1rem;display: flex;align-items: center;justify-content: space-around;width: 100%;">
+                                <p ><%= options[i].choice %></p>
+                                <div style="display: flex;align-items: center;justify-content: space-around;width: 70%;">
+                                <div >                                                                         
+                                      
+                                    <a class="pushable front" style="text-decoration: none;font-size: smaller;padding: 3px;" href="/elections/<%= id %>/questions/<%= questionID %>/options/<%= options[i].id %>/edit" >Edit option</a>
                                 </div>
-                                <div class="rounded w-fit px-2 py-1 flex gap-2 cursor-pointer hover:text-cyan-600">                                   
-                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                <div >                                   
+                                     
 
-                                    <a onclick="deleteOptionHere(<%= options[i].id %>)" class="text-sm hover:text-indigo-900">>Delete option</a>
+                                    <a class="pushable front" style="text-decoration: none;font-size: smaller;padding: 3px;" onclick="deleteOptionHere(<%= options[i].id %>)" >Delete option</a>
                                 </div>
                                 </div>
                             </div>
@@ -99,20 +178,18 @@
             <!-- form for posting -->
             <form action="/elections/<%= id %>/questions/<%= questionID %>" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                <div class="flex flex-col gap-2 py-4">
-                    <div class="flex-auto">
-                        <input type="text" name="option" placeholder="Enter an option" class="border border-gray-300 text-gray-900 w-full rounded p-2 text-sm" required />
+                <div >
+                    <div >
+                        <input type="text" name="option" placeholder="Enter an option"  required />
                     </div>
-                    <div class="flex-none">
-                        <button type="submit" class="bg-cyan-600 text-white px-5 py-1.5 rounded mr-2 mb-2 hover:text-indigo-900">+ Add option</button>
+                    <div >
+                        <button class="front pushable" type="submit" > Add option</button>
                     </div>
-                    <div class="flex-none">
-                        <a type="submit" href="/elections/<%= id %>/questions" class="bg-cyan-600 text-white px-5 py-1.5 rounded mr-2 mb-2 hover:text-indigo-900">	&lt; -- Go Back</a>
-                    </div>
+                    
                 </div>
             </form>
             <!-- if number of options == 0 -->
-            <p class="text-cyan-800"><%= (options.length==0)?"You haven't added any options yet!":"" %></p>
+            <p ><%= (options.length==0)?"You haven't added any options yet!":"" %></p>
         </div>
     </div>
 </body>
