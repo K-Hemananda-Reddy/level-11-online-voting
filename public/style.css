@@ -47,7 +47,11 @@ body{
     100% { color: brown; }
   }
 
-
+  input,textarea{
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 3px solid blue;
+  }
 
 .header a{
     text-decoration: none;

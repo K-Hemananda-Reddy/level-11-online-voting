@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<%= csrfToken %>">
-    <script src="https://cdn.tailwindcss.com"></script>
+   
     <link rel="icon" type="image/x-icon" href="/img/vote.png">
     <title>Edit question</title>
     <script>
@@ -32,62 +32,134 @@
         }
     </script>
         <style>
-            body{
-              background-size:cover;
-            }
-            #round{
-                border-radius: 50px;
-            }
-            .one{
-                display: flex;
-                flex-direction: column;
-                overflow: hidden;
+            @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap'); 
+ @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');  
 
-            }
-            .two{
-                display: flex;
-                flex-direction: row;
-            }
-            .six{
-                background-color: rgb(106, 104, 104);
-                border: 2px solid aqua;
-            }
-            .seven{
-                background-color: rgb(106, 104, 104);
-                border: 2px solid aqua;
-            }
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+    animation: bg-change 5s infinite;
+    font-family: 'PT Sans', sans-serif;
+}
+
+@keyframes bg-change {
+    0% { background-color: black; }
+    50% { background-color: grey; }
+    100% {  background-color: rgb(210, 207, 207);}
+}
+
+.header{
+    margin-top: 2rem;
+    border: 3px solid white;
+    padding: 1rem;
+    background-color: hotpink;
+    border-radius: 10px;
+    width:95vw;
+    text-align: center;
+    font-family: 'Rowdies', cursive;
+    font-size: 2rem;
+    animation: back-change 2s infinite;
+}
+
+@keyframes back-change {
+    0% { background-color: yellow; }
+    50% { background-color: antiquewhite; }
+    100% {  background-color: rgb(250, 166, 208);}
+    
+}
+
+
+  
+  @keyframes color-change {
+    0% { color: green; }
+    50% { color: blue;; }
+    100% { color: brown; }
+  }
+
+
+
+.header a{
+    text-decoration: none;
+    color: blueviolet;
+    animation: color-change 2s infinite;
+}
+.btn{
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    border: 3px solid white;
+    border-radius: 9px;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: bolder;
+}
+
+.mt{
+    margin-top: 4rem;
+}
+
+
+.pushable {
+    background: hsl(340deg 100% 32%);
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    cursor: pointer;
+  }
+  .front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: hsl(345deg 100% 47%);
+    color: white;
+    transform: translateY(-4px);
+  }
+  
+  .pushable:focus:not(:focus-visible) {
+    outline: none;
+  }
+  input,textarea{
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 3px solid blue;
+  }
           </style>
 </head>
-<body class="bg-gray-50" background="img/image.jpg">
+<body>
     <%- include('header.ejs') %>
-    <!-- breadcrumbs -->
-    <div class="flex gap-1 mx-10 mt-6 bg-green-200">
-        <span>--></span>
-        <a href="/elections" class="text-cyan-800 hover:text-cyan-600 font-serif">All Elections</a>
-        <span>--></span>
-        <a href="/elections/<%= electionID %>/" class="text-cyan-800 hover:text-cyan-600 font-serif">Election</a>
-        <span>--></span>
-        <a href="/elections/<%= electionID %>/questions" class="text-cyan-800 hover:text-cyan-600 font-serif">Questions</a>
+   
+    <div style="display: flex; width: 50%;justify-content: space-around;margin-bottom: 1rem;">
+      
+        <a class="front pushable" href="/elections" >All Elections</a>
+
+        <a class="front pushable" href="/elections/<%= electionID %>/">Election</a>
+     
+        <a class="front pushable" href="/elections/<%= electionID %>/questions" >Questions</a>
     </div>
-    <div class="one text-gray-800 antialiased bg-yellow-200 py-7 sm:py-14">
-        <div class=" py-3 sm:w-96 text-center">
-            <span class="text-2xl font-light font-serif hover:text-indigo-900 text-red 	text-decoration-line: underline text-black">Edit question</span>
+    <div >
+        <div>
+            <h2 >Edit question</h2>
             <div>
                 <% if (messages && messages.error && messages.error.length > 0) { %>
                     <% for(var i=0; i<messages.error.length; i++) { %>
-                        <p class="bg-white my-3 list-none rounded-md px-4 py-2 font-serif"><%= messages.error[i] %></p>
+                        <p ><%= messages.error[i] %></p>
                     <% } %>
                 <% } %>
             </div>
-            <div class="mt-4 shadow-md rounded-lg text-left"> 
-                <div class="px-8 py-6">
-                    <!-- question and description -->
+            <div> 
+                <div style="display: flex;flex-direction: column;" >
+      
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                    <label for="questionName" class="block mt-3 font-semibold font-serif text-black">Question</label>
-                    <input value="<%= questionName %>" id="questionName" name="questionName" type="text" placeholder="Question" class="six border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md" required>
-                    <label for="description" class="block mt-3 font-semibold font-serif text-black">Description</label>
-                    <textarea id="description" name="description" class="six border w-full px-2 py-1 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md font-serif" placeholder="Question Description" rows="8" cols="20"><%= description %></textarea>
-                    <button id="round" class="mt-6 w-full bg-cyan-500 text-white py-2 px-6 rounded-md hover:bg-cyan-600 font-serif hover:text-indigo-900" onclick="updateAQuestion()">Update question</button>
+                    <h3><label for="questionName" >Question</label></h3>
+                    <input value="<%= questionName %>" id="questionName" name="questionName" type="text" placeholder="Question"  required>
+                    <h3><label for="description" >Description</label></h3>
+                    <textarea id="description" name="description"  placeholder="Question Description" rows="8" cols="20"><%= description %></textarea>
+                    <button class="pushable front" style="margin-top:1rem" id="round"  onclick="updateAQuestion()">Update question</button>
                 </div>
             </div>
         </div>
