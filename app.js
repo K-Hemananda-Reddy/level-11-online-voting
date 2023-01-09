@@ -697,7 +697,7 @@ app.get("/elections/:electionID/voters",
 );
 
 
-// a route used to add voters the admin can give username , password to add voters.
+// a route used to add voters the admin can give username , password to add voters in the online voting system.
 app.post("/elections/:electionID/voters/create",
   connectEnsureLogin.ensureLoggedIn(),async function(requestr, responser) {
     if (requestr.user.role === "admin") {
